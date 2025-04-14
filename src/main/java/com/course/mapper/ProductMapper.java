@@ -35,7 +35,7 @@ public class ProductMapper {
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
-        product.setImgUrl(product.getImgUrl());
+        product.setImgUrl(productDTO.getImgUrl());
         if (productDTO.getCategoriesId() != null && !productDTO.getCategoriesId().isEmpty()) {
             for (Long categoryId : productDTO.getCategoriesId()) {
                 Category category = categoryService.findById(categoryId);
