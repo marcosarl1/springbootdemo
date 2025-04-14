@@ -1,6 +1,8 @@
 package com.course.controller;
 
+import com.course.dto.UserDTO;
 import com.course.exception.ResourceNotFoundException;
+import com.course.mapper.UserMapper;
 import com.course.model.User;
 import com.course.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -15,22 +17,24 @@ import java.util.List;
 @RequestMapping("users")
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
+    private final UserMapper userMapper;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserMapper userMapper) {
         this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
-        List<User> users = userService.findAll();
+    public ResponseEntity<List<UserDTO>> findAll() {
+        List<UserDTO> users = userMapper.toDTO(userService.findAll());
         return ResponseEntity.ok().body(users);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id) {
+    public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
         try {
-            User user = userService.findById(id);
+            UserDTO user = userMapper.toDTO(userService.findById(id));
             return ResponseEntity.ok().body(user);
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.notFound().build();
