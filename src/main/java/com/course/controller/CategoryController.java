@@ -2,9 +2,7 @@ package com.course.controller;
 
 import com.course.exception.ResourceNotFoundException;
 import com.course.model.Category;
-import com.course.model.User;
 import com.course.service.CategoryService;
-import com.course.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
