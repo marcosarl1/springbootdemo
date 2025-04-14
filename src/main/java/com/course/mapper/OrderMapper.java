@@ -34,6 +34,7 @@ public class OrderMapper {
         Order order = new Order();
         order.setId(orderDTO.getId());
         order.setMoment(orderDTO.getMoment());
+        order.setOrderStatus(orderDTO.getOrderStatus());
 
         if (orderDTO.getUserId() != null) {
             User user = userService.findById(orderDTO.getUserId());
