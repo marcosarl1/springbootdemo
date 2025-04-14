@@ -13,17 +13,17 @@ public class ProductDTO {
     private String description;
     private Double price;
     private String imgUrl;
-    private Set<Long> categories_Id;
+    private Set<Long> categoriesId;
 
     public ProductDTO() {}
 
-    public ProductDTO(Long id, String name, String description, Double price, String imgUrl, Set<Long> categories_Id) {
+    public ProductDTO(Long id, String name, String description, Double price, String imgUrl, Set<Long> categoriesId) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.imgUrl = imgUrl;
-        this.categories_Id = categories_Id;
+        this.categoriesId = categoriesId;
     }
 
     public ProductDTO(Product product) {
@@ -32,7 +32,7 @@ public class ProductDTO {
         this.description = product.getDescription();
         this.price = product.getPrice();
         this.imgUrl = product.getImgUrl();
-        this.categories_Id = product.getCategories().stream()
+        this.categoriesId = product.getCategories().stream()
                 .map(Category::getId)
                 .collect(Collectors.toSet());
     }
@@ -77,11 +77,11 @@ public class ProductDTO {
         this.imgUrl = imgUrl;
     }
 
-    public Set<Long> getCategories_Id() {
-        return categories_Id;
+    public Set<Long> getCategoriesId() {
+        return categoriesId;
     }
 
-    public void setCategories_Id(Set<Long> categories_Id) {
-        this.categories_Id = categories_Id;
+    public void setCategoriesId(Set<Long> categoriesId) {
+        this.categoriesId = categoriesId;
     }
 }
