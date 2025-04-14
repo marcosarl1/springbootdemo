@@ -19,13 +19,15 @@ public class OrderMapper {
     }
 
     public OrderDTO toDto(Order order) {
-        return new OrderDTO(order.getId(), order.getMoment(), order.getClient() != null ? order.getClient().getId() : null);
+        if (order == null) return null;
+
+        return new OrderDTO(order);
     }
 
     public List<OrderDTO> toDTO(List<Order> orders) {
         return orders.stream()
                 .map(this::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public Order toEntity(OrderDTO orderDTO) {
