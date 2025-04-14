@@ -1,6 +1,8 @@
 package com.course.controller;
 
+import com.course.dto.CategoryDTO;
 import com.course.exception.ResourceNotFoundException;
+import com.course.mapper.CategoryMapper;
 import com.course.model.Category;
 import com.course.service.CategoryService;
 import org.springframework.http.ResponseEntity;
@@ -16,21 +18,23 @@ import java.util.List;
 public class CategoryController {
 
     private final CategoryService categoryService;
+    private final CategoryMapper categoryMapper;
 
-    public CategoryController(CategoryService categoryService) {
+    public CategoryController(CategoryService categoryService, CategoryMapper categoryMapper) {
         this.categoryService = categoryService;
+        this.categoryMapper = categoryMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<Category>> findAll() {
-        List<Category> categories = categoryService.findAll();
+    public ResponseEntity<List<CategoryDTO>> findAll() {
+        List<CategoryDTO> categories = categoryMapper.toDTO(categoryService.findAll());
         return ResponseEntity.ok().body(categories);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> findById(@PathVariable Long id) {
+    public ResponseEntity<CategoryDTO> findById(@PathVariable Long id) {
         try {
-            Category category = categoryService.findById(id);
+            CategoryDTO category = categoryMapper.toDTO(categoryService.findById(id));
             return ResponseEntity.ok().body(category);
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.notFound().build();
