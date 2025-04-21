@@ -1,13 +1,14 @@
 package com.course.mapper;
 
 import com.course.dto.OrderDTO;
+import com.course.dto.PaymentDTO;
 import com.course.model.Order;
+import com.course.model.Payment;
 import com.course.model.User;
 import com.course.service.UserService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class OrderMapper {
@@ -21,7 +22,14 @@ public class OrderMapper {
     public OrderDTO toDto(Order order) {
         if (order == null) return null;
 
-        return new OrderDTO(order);
+        OrderDTO dto = new OrderDTO(order);
+
+        if (order.getPayment() != null) {
+            PaymentDTO paymentDTO = new PaymentDTO(order.getPayment());
+            dto.setPayment(paymentDTO);
+        }
+
+        return dto;
     }
 
     public List<OrderDTO> toDTO(List<Order> orders) {
@@ -39,6 +47,15 @@ public class OrderMapper {
         if (orderDTO.getUserId() != null) {
             User user = userService.findById(orderDTO.getUserId());
             order.setClient(user);
+        }
+
+        if (orderDTO.getPayment() != null) {
+            PaymentDTO paymentDTO = orderDTO.getPayment();
+            Payment payment = new Payment();
+            payment.setId(paymentDTO.getId());
+            payment.setMoment(paymentDTO.getMoment());
+            payment.setOrder(order);
+            order.setPayment(payment);
         }
 
         return order;

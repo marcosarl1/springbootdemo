@@ -16,6 +16,7 @@ public class OrderDTO {
     private OrderStatus orderStatus;
     private Long userId;
     private Set<OrderItemDTO> items = new HashSet<>();
+    private PaymentDTO payment;
 
     public OrderDTO() {}
 
@@ -70,6 +71,14 @@ public class OrderDTO {
 
     public Set<OrderItemDTO> getItems() {
         return items;
+    }
+
+    public PaymentDTO getPayment() {
+        return payment;
+    }
+
+    public void setPayment(PaymentDTO paymentDTO) {
+        this.payment = paymentDTO;
     }
 
     @Override
