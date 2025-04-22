@@ -11,16 +11,18 @@ public class UserDTO {
     private String name;
     private String email;
     private String phone;
+    private String password;
     private List<Long> orderIds = new ArrayList<>();
 
     public UserDTO() {
     }
 
-    public UserDTO(Long id, String name, String email, String phone, List<Long> orderIds) {
+    public UserDTO(Long id, String name, String email, String phone, String password, List<Long> orderIds) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
+        this.password = password;
         this.orderIds = orderIds;
     }
 
@@ -67,6 +69,14 @@ public class UserDTO {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<Long> getOrderIds() {

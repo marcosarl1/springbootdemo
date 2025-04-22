@@ -5,11 +5,9 @@ import com.course.exception.ResourceNotFoundException;
 import com.course.mapper.UserMapper;
 import com.course.model.User;
 import com.course.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,5 +37,13 @@ public class UserController {
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping
+    public ResponseEntity<UserDTO> insert(@RequestBody UserDTO userDTO) {
+        User user = userMapper.toEntity(userDTO);
+        User savedUser = userService.insert(user);
+        UserDTO savedUserDTO = userMapper.toDTO(savedUser);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedUserDTO);
     }
 }
