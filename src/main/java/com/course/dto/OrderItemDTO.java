@@ -81,4 +81,8 @@ public class OrderItemDTO {
     public Set<String> getCategories() {
         return categories;
     }
+
+    public Double getSubTotal() {
+        return price * quantity;
+    }
 }

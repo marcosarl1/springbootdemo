@@ -81,6 +81,14 @@ public class OrderDTO {
         this.payment = paymentDTO;
     }
 
+    public Double getTotal() {
+        double sum = 0.0;
+        for (OrderItemDTO item : items) {
+            sum += item.getSubTotal();
+        }
+        return sum;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof OrderDTO orderDTO)) return false;

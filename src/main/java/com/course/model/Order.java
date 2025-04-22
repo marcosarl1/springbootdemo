@@ -89,6 +89,14 @@ public class Order {
         this.payment = payment;
     }
 
+    public Double getTotal() {
+        double sum = 0;
+        for (OrderItem x : items) {
+            sum += x.getSubTotal();
+        }
+        return sum;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Order order)) return false;
