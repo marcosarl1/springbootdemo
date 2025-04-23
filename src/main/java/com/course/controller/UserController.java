@@ -46,4 +46,14 @@ public class UserController {
         UserDTO savedUserDTO = userMapper.toDTO(savedUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUserDTO);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        try {
+            userService.delete(id);
+            return ResponseEntity.noContent().build();
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
