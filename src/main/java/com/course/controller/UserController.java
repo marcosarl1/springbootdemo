@@ -1,7 +1,6 @@
 package com.course.controller;
 
 import com.course.dto.UserDTO;
-import com.course.exception.ResourceNotFoundException;
 import com.course.mapper.UserMapper;
 import com.course.model.User;
 import com.course.service.UserService;

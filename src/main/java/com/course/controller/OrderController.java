@@ -1,9 +1,7 @@
 package com.course.controller;
 
 import com.course.dto.OrderDTO;
-import com.course.exception.ResourceNotFoundException;
 import com.course.mapper.OrderMapper;
-import com.course.model.Order;
 import com.course.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

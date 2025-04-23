@@ -1,9 +1,7 @@
 package com.course.controller;
 
 import com.course.dto.CategoryDTO;
-import com.course.exception.ResourceNotFoundException;
 import com.course.mapper.CategoryMapper;
-import com.course.model.Category;
 import com.course.service.CategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

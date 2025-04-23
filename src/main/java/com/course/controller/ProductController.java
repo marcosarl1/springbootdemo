@@ -1,7 +1,6 @@
 package com.course.controller;
 
 import com.course.dto.ProductDTO;
-import com.course.exception.ResourceNotFoundException;
 import com.course.mapper.ProductMapper;
 import com.course.service.ProductService;
 import org.springframework.http.ResponseEntity;
