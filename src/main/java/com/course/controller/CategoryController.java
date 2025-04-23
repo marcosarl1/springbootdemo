@@ -33,11 +33,7 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CategoryDTO> findById(@PathVariable Long id) {
-        try {
-            CategoryDTO category = categoryMapper.toDTO(categoryService.findById(id));
-            return ResponseEntity.ok().body(category);
-        } catch (ResourceNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        CategoryDTO category = categoryMapper.toDTO(categoryService.findById(id));
+        return ResponseEntity.ok().body(category);
     }
 }

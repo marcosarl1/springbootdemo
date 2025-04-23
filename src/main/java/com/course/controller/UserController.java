@@ -31,12 +31,9 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
-        try {
-            UserDTO user = userMapper.toDTO(userService.findById(id));
-            return ResponseEntity.ok().body(user);
-        } catch (ResourceNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        UserDTO user = userMapper.toDTO(userService.findById(id));
+        return ResponseEntity.ok().body(user);
+
     }
 
     @PostMapping
@@ -49,23 +46,15 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO userDTO) {
-        try {
-            User user = userMapper.toEntity(userDTO);
-            User updatedUser = userService.update(id, user);
-            UserDTO updatedUserDTO = userMapper.toDTO(updatedUser);
-            return ResponseEntity.ok().body(updatedUserDTO);
-        } catch (ResourceNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        User user = userMapper.toEntity(userDTO);
+        User updatedUser = userService.update(id, user);
+        UserDTO updatedUserDTO = userMapper.toDTO(updatedUser);
+        return ResponseEntity.ok().body(updatedUserDTO);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        try {
-            userService.delete(id);
-            return ResponseEntity.noContent().build();
-        } catch (ResourceNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

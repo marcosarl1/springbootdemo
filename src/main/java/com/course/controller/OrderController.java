@@ -33,11 +33,7 @@ public class OrderController {
 
     @GetMapping("/{id}")
     public ResponseEntity<OrderDTO> findById(@PathVariable Long id) {
-        try {
-            OrderDTO order = orderMapper.toDto(orderService.findById(id));
-            return ResponseEntity.ok().body(order);
-        } catch (ResourceNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        OrderDTO order = orderMapper.toDto(orderService.findById(id));
+        return ResponseEntity.ok().body(order);
     }
 }

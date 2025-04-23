@@ -32,11 +32,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
-        try {
-            ProductDTO product = productMapper.toDTO(productService.findById(id));
-            return ResponseEntity.ok().body(product);
-        } catch (ResourceNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        ProductDTO product = productMapper.toDTO(productService.findById(id));
+        return ResponseEntity.ok().body(product);
     }
 }
