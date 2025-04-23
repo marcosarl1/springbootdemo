@@ -47,6 +47,18 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUserDTO);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO userDTO) {
+        try {
+            User user = userMapper.toEntity(userDTO);
+            User updatedUser = userService.update(id, user);
+            UserDTO updatedUserDTO = userMapper.toDTO(updatedUser);
+            return ResponseEntity.ok().body(updatedUserDTO);
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         try {
