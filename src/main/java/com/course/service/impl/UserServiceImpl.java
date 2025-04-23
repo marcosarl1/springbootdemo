@@ -1,9 +1,11 @@
 package com.course.service.impl;
 
+import com.course.exception.DatabaseException;
 import com.course.exception.ResourceNotFoundException;
 import com.course.model.User;
 import com.course.repository.UserRepository;
 import com.course.service.UserService;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,10 +44,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(Long id) {
-        if (!userRepository.existsById(id)) {
-            throw new ResourceNotFoundException("User not found");
+        try {
+            User user = userRepository.findById(id)
+                            .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+            userRepository.delete(user);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
         }
-        userRepository.deleteById(id);
     }
 
     private void updateData(User existingUser, User user) {
