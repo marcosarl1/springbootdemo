@@ -5,6 +5,7 @@ import com.course.exception.ResourceNotFoundException;
 import com.course.model.User;
 import com.course.repository.UserRepository;
 import com.course.service.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
@@ -37,9 +38,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User update(Long id, User user) {
-        User existingUser = userRepository.getReferenceById(id);
-        updateData(existingUser, user);
-        return userRepository.save(existingUser);
+        try {
+            User existingUser = userRepository.getReferenceById(id);
+            updateData(existingUser, user);
+            return userRepository.save(existingUser);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("User not found with id: " + id);
+        }
     }
 
     @Override
